@@ -1,166 +1,115 @@
-# Vehicle Image Classification using MobileNetV2 and TensorFlow
+# Vehicle Image Classification with MobileNetV2 Transfer Learning
 
-## Overview
-This project focuses on vehicle image classification using Deep Learning and Transfer Learning approaches with MobileNetV2. The model is trained to classify four vehicle categories: car, bus, truck, and motorcycle.
+[![Python](https://img.shields.io/badge/Python-3.10%2B-blue?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+[![TensorFlow](https://img.shields.io/badge/TensorFlow-2.x-FF6F00?style=for-the-badge&logo=tensorflow&logoColor=white)](https://www.tensorflow.org/)
+[![TFLite](https://img.shields.io/badge/TFLite-Quantized-009688?style=for-the-badge&logo=tensorflow&logoColor=white)](https://www.tensorflow.org/lite)
+[![TensorFlow.js](https://img.shields.io/badge/TF.js-Exported-FF6F00?style=for-the-badge&logo=javascript&logoColor=black)](https://www.tensorflow.org/js)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](LICENSE)
 
-The project covers the complete Computer Vision workflow including data preprocessing, augmentation, model training, evaluation, visualization, inference, and deployment-oriented model conversion.
-
----
-
-## Features
-- Vehicle image classification with Deep Learning
-- Transfer Learning using MobileNetV2
-- Data augmentation and preprocessing
-- Model evaluation and visualization
-- Real-time image inference simulation
-- TensorFlow Lite model conversion
-- TensorFlow.js model conversion
-- SavedModel export for deployment purposes
+> Deep learning computer vision project utilizing MobileNetV2 transfer learning and fine-tuning for multi-class vehicle image classification, exported to TensorFlow Lite (TFLite) and TensorFlow.js formats.
 
 ---
 
-## Dataset
-The dataset contains approximately 18,354 vehicle images divided into four classes:
-- Car
-- Bus
-- Truck
-- Motorcycle
+## 📌 Overview
 
-Only a small sample dataset is included in this repository for demonstration purposes.
+**Vehicle Image Classification MobileNetV2** is a computer vision project focused on lightweight multi-class image classification. Built with **TensorFlow** and **Keras**, the system leverages a pre-trained **MobileNetV2** backbone with custom classification heads and fine-tuning layers.
 
-### Dataset Source
-[https://www.kaggle.com/datasets/yash88600/miotcd-dataset-50000-imagesclassification/data?select=train1](https://www.kaggle.com/datasets/yash88600/miotcd-dataset-50000-imagesclassification)
+The model is optimized for edge deployment, exporting lightweight **TensorFlow Lite (`.tflite`)** flatbuffers for mobile applications and **TensorFlow.js (`tfjs_model/`)** artifacts for browser-based client-side inference.
 
 ---
 
-## Model Architecture
+## ✨ Key Features
 
-### Transfer Learning
-- MobileNetV2 (ImageNet pretrained)
-
-### Additional Layers
-- Conv2D
-- MaxPooling2D
-- GlobalAveragePooling2D
-- Dense Layer
-- Dropout
-- Softmax Output Layer
+- 🏎️ **Multi-Class Vehicle Classification**: Accurate classification across vehicle categories (e.g. cars, motorcycles, buses, trucks).
+- 🧠 **Transfer Learning & Fine-Tuning**: Pre-trained ImageNet MobileNetV2 feature extractor fine-tuned with un-frozen top convolutional layers.
+- 🖼️ **Realtime Image Data Augmentation**: Random rotation, zoom, horizontal flip, and shear transformations to prevent overfitting.
+- ⚡ **Multi-Format Model Exports**:
+  - **Keras H5**: Uncompressed Keras model (`.h5`) for server-side evaluation.
+  - **TFLite Flatbuffer**: Quantized TensorFlow Lite model (`.tflite`) for mobile runtime.
+  - **TensorFlow.js**: Web-ready JSON & bin shards (`tfjs_model/`) for zero-latency client-side browser prediction.
 
 ---
 
-## Technologies & Libraries
-- Python
-- TensorFlow / Keras
-- MobileNetV2
-- Google Colab
-- NumPy
-- Pandas
-- Matplotlib
-- Scikit-learn
-- PIL
+## 🛠️ Tech Stack
+
+**Language & Environment**
+- Python 3.10+
+- Jupyter Notebook
+
+**Deep Learning & Computer Vision**
+- TensorFlow 2.x / Keras
+- MobileNetV2 (ImageNet Pre-Trained Backbone)
+- OpenCV & Pillow
+
+**Edge Export Converters**
+- TensorFlow Lite Converter (`tf.lite.TFLiteConverter`)
+- TensorFlow.js Converter (`tensorflowjs_converter`)
 
 ---
 
-## Project Structure
+## 🏗️ Model Training & Export Pipeline
 
-```bash
-vehicle-image-classification-mobilenetv2/
-│
-├── dataset/
-│   ├── sample_bus/
-│   ├── sample_car/
-│   ├── sample_motorcycle/
-│   ├── sample_truck/
-│   └── README.md
-│
-├── images/
-│   ├── accuracy_loss_plot.png
-│   ├── confusion_matrix.png
-│   ├── dataset_distribution.png
-│   ├── prediction_examples.png
-│   └── README.md
-│
-├── model/
-│   ├── saved_model/
-│   ├── tfjs_model/
-│   ├── tflite/
-│   └── README.md
-│
-├── notebook/
-│   ├── vehicle_image_classification.ipynb
-│   └── README.md
-│
-├── README.md
-├── LICENSE
-└── .gitignore
+```mermaid
+flowchart LR
+    A["Raw Vehicle Images"] --> B["Data Augmentation & Normalization"]
+    B --> C["MobileNetV2 Backbone (ImageNet Weights)"]
+    C --> D["Custom Global Average Pooling & Dense Head"]
+    D --> E["Fine-Tuning Convolutional Layers"]
+    E --> F1["Export Keras H5 Model"]
+    E --> F2["Convert to TFLite Flatbuffer (.tflite)"]
+    E --> F3["Convert to TensorFlow.js (tfjs_model/)"]
 ```
 
 ---
 
-## Data Visualization
+## 📂 Project Structure
 
-### Dataset Distribution
-![Dataset Distribution](images/dataset_distribution.png)
-
----
-
-### Training Accuracy & Loss
-![Accuracy Loss Plot](images/accuracy_loss_plot.png)
-
----
-
-### Confusion Matrix
-![Confusion Matrix](images/confusion_matrix.png)
+```text
+vehicle-image-classification-mobileNetV2/
+├── dataset/                  # Vehicle image dataset split (train, validation, test)
+├── images/                   # Sample classification outputs & accuracy/loss plots
+├── model/                    # Saved model artifacts (.h5, .tflite, tfjs_model/)
+├── notebook/                 # Training, evaluation, and export notebook
+├── requirements.txt          # Dependencies list
+├── LICENSE                   # MIT License
+└── README.md                 # Project Documentation
+```
 
 ---
 
-### Prediction Examples
-![Prediction Examples](images/prediction_examples.png)
+## 🚀 Getting Started
+
+### Prerequisites
+- Python 3.10 or higher
+- Jupyter Notebook / JupyterLab
+
+### Local Execution
+
+1. **Clone the Repository**:
+   ```bash
+   git clone https://github.com/RaihanHadriansyah21/vehicle-image-classification-mobileNetV2.git
+   cd vehicle-image-classification-mobileNetV2
+   ```
+
+2. **Create Virtual Environment**:
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows: .\venv\Scripts\Activate.ps1
+   ```
+
+3. **Install Dependencies**:
+   ```bash
+   pip install tensorflow numpy matplotlib pillow tensorflowjs
+   ```
+
+4. **Launch Notebook**:
+   ```bash
+   jupyter notebook
+   ```
+   Open `notebook/` to execute model training, evaluation, and model conversion workflows.
 
 ---
 
-## Model Evaluation
-The model was evaluated using validation and test datasets to measure classification performance across all vehicle categories.
+## 📄 License
 
-Evaluation includes:
-- Accuracy
-- Validation Loss
-- Confusion Matrix Analysis
-- Prediction Confidence Visualization
-
----
-
-## Inference
-The project includes image inference functionality where users can upload vehicle images and receive prediction results with confidence scores.
-
----
-
-## Model Deployment Formats
-
-The trained model was exported into multiple deployment-ready formats:
-
-- TensorFlow SavedModel
-- TensorFlow Lite (TFLite)
-- TensorFlow.js (TFJS)
-
-This enables future deployment for:
-- Mobile applications
-- Web applications
-- Edge AI systems
-
----
-
-## Future Improvements
-- Implement advanced architectures such as EfficientNet or ResNet
-- Add real-time webcam detection
-- Deploy the model into a web application
-- Improve model generalization with larger datasets
-- Add object detection capabilities
-
----
-
-## Author
-**Mohammad Raihan Hadriansyah Prasetya**
-
-Telecommunication Engineering Student  
-AI & Machine Learning Enthusiast
+This repository is licensed under the [MIT License](LICENSE).
